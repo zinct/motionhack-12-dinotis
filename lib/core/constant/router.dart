@@ -1,5 +1,7 @@
 class ROUTER {
   static const SPLASH = '/splash';
+  static const ONBOARDING_ONE = '/onboarding-one';
+  static const ONBOARDING_TWO = '/onboarding-two';
   static const HOME = '/home';
   static const LOGIN = '/login';
   static const PROFILE = '/profile';

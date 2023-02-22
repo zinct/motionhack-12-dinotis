@@ -76,7 +76,7 @@ class ProfileCoinScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
