@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motionhack/core/resources/colors.dart';
-import 'package:motionhack/core/resources/gradient.dart';
 import 'package:motionhack/core/widgets/custom_button.dart';
 import 'package:motionhack/core/widgets/custom_text_input.dart';
 import 'package:unicons/unicons.dart';
 
-class ProfileEditScreen extends StatelessWidget {
-  const ProfileEditScreen({super.key});
+class ProfilePasswordScreen extends StatelessWidget {
+  const ProfilePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class ProfileEditScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Ubah Profil",
+          "Ganti Kata Sandi",
           style: GoogleFonts.inter().copyWith(
             fontSize: 15,
             fontWeight: FontWeight.bold,
@@ -47,49 +46,11 @@ class ProfileEditScreen extends StatelessWidget {
                       SizedBox(
                         height: 25,
                       ),
-                      Center(
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: 90,
-                              height: 85,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0XFFDDDDDD),
-                              ),
-                              width: 82,
-                              height: 82,
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: 5,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: BaseGradient.primaryGradient,
-                                ),
-                                width: 29,
-                                height: 29,
-                                child: Icon(
-                                  UniconsLine.pen,
-                                  color: Colors.white,
-                                  size: 17,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Nama",
+                            "Kata sandi lama",
                             style: GoogleFonts.inter().copyWith(
                               fontSize: 15,
                             ),
@@ -98,13 +59,13 @@ class ProfileEditScreen extends StatelessWidget {
                             height: 10,
                           ),
                           CustomTextInput(
-                            hintText: "Indra Mahesa",
+                            hintText: "Masukan kata sandi lama",
                           ),
                           SizedBox(
                             height: 25,
                           ),
                           Text(
-                            "Nomor Handphone",
+                            "Kata sandi baru",
                             style: GoogleFonts.inter().copyWith(
                               fontSize: 15,
                             ),
@@ -113,7 +74,22 @@ class ProfileEditScreen extends StatelessWidget {
                             height: 10,
                           ),
                           CustomTextInput(
-                            hintText: "+62813937432",
+                            hintText: "Masukan kata sandi baru",
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Text(
+                            "Ulangi kata sandi baru",
+                            style: GoogleFonts.inter().copyWith(
+                              fontSize: 15,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          CustomTextInput(
+                            hintText: "Ulangi kata sandi baru",
                           ),
                         ],
                       ),

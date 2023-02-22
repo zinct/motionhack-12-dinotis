@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motionhack/core/constant/router.dart';
 import 'package:motionhack/core/resources/colors.dart';
 import 'package:motionhack/core/resources/gradient.dart';
 import 'package:unicons/unicons.dart';
@@ -116,18 +117,24 @@ class ProfileScreen extends StatelessWidget {
                         flex: 4,
                       ),
                       Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color(0XFFDDDDDD),
-                            gradient: BaseGradient.primaryGradient,
+                        child: InkWell(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0XFFDDDDDD),
+                              gradient: BaseGradient.primaryGradient,
+                            ),
+                            width: 35,
+                            height: 35,
+                            child: Icon(
+                              UniconsLine.clock,
+                              color: Colors.white,
+                            ),
                           ),
-                          width: 35,
-                          height: 35,
-                          child: Icon(
-                            UniconsLine.clock,
-                            color: Colors.white,
-                          ),
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(ROUTER.PROFILE_COIN);
+                          },
                         ),
                         flex: 1,
                       ),
@@ -179,7 +186,9 @@ class ProfileScreen extends StatelessWidget {
                         UniconsLine.angle_left,
                         size: 30,
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed(ROUTER.PROFILE_EDIT);
+                      },
                     ),
                     Divider(),
                     ListTile(
@@ -194,7 +203,9 @@ class ProfileScreen extends StatelessWidget {
                         UniconsLine.angle_left,
                         size: 30,
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed(ROUTER.PROFILE_CREATOR);
+                      },
                     ),
                     Divider(),
                     ListTile(
@@ -209,7 +220,10 @@ class ProfileScreen extends StatelessWidget {
                         UniconsLine.angle_left,
                         size: 30,
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(ROUTER.PROFILE_PASSWORD);
+                      },
                     ),
                     Divider(),
                     ListTile(
