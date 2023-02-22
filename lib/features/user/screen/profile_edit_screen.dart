@@ -126,7 +126,18 @@ class ProfileEditScreen extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: CustomButton(),
+                child: CustomButton(
+                  child: Center(
+                    child: Text(
+                      "Ubah Sekarang",
+                      style: GoogleFonts.inter().copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

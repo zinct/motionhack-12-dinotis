@@ -8,6 +8,7 @@ import 'package:motionhack/features/home/bloc/home_bloc.dart';
 import 'package:motionhack/features/home/screen/home_screen.dart';
 import 'package:motionhack/features/intro/screen/onboard_one_screen.dart';
 import 'package:motionhack/features/intro/screen/onboard_two_screen.dart';
+import 'package:motionhack/features/intro/screen/role_screen.dart';
 import 'package:motionhack/features/intro/screen/splash_screen.dart';
 import 'package:motionhack/features/user/screen/profile_coin_screen.dart';
 import 'package:motionhack/features/user/screen/profile_creator_screen.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           ROUTER.PROFILE_CREATOR: (context) => ProfileCreatorScreen(),
           ROUTER.PROFILE_COIN: (context) => ProfileCoinScreen(),
           ROUTER.PROFILE_PASSWORD: (context) => ProfilePasswordScreen(),
+          ROUTER.ROLE: (context) => RoleScreen(),
         },
       ),
     );

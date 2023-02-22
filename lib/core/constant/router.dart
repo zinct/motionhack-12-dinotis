@@ -9,5 +9,6 @@ class ROUTER {
   static const PROFILE_CREATOR = '/profile-creator';
   static const PROFILE_HELP = '/profile-help';
   static const PROFILE_PASSWORD = '/profile-password';
-  static const PROFILE_COIN = '/profile-password';
+  static const PROFILE_COIN = '/profile-coin';
+  static const ROLE = '/role';
 }
