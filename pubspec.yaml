@@ -36,6 +36,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   dio: ^5.0.0
+  unicons: ^2.1.0
+  google_fonts: ^4.0.3
 
   # Core
   json_annotation: ^4.8.0
@@ -44,7 +46,6 @@ dependencies:
   equatable: ^2.0.5
   shimmer: ^2.0.0
   intl: ^0.18.0
-  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,7 @@ flutter:
   assets:
     - assets/svg/
     - assets/images/
+    - assets/images/profile/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
