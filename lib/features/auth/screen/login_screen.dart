@@ -17,20 +17,12 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: Text(
-          "Ubah Profil",
-          style: GoogleFonts.inter().copyWith(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+        title: Image.asset(
+          'assets/images/logo.png',
+          scale: 4,
         ),
         actions: [
-          Icon(
-            UniconsLine.comment,
-            color: BaseColors.primaryColor,
-            size: 36,
-          ),
+          SvgPicture.asset('assets/svg/ic_info.svg'),
           SizedBox(width: 15),
         ],
         iconTheme: IconThemeData(color: Colors.black),
@@ -71,14 +63,72 @@ class LoginScreen extends StatelessWidget {
                   CustomTextInput(
                     hintText: "Masukan kata sandi",
                   ),
-                  SizedBox(height: 20),
-                  Text(
-                    "Lupa kata sandi?",
-                    style: GoogleFonts.inter().copyWith(
-                      fontSize: 15,
-                      color: BaseColors.primaryColor,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      "Lupa kata sandi?",
+                      style: GoogleFonts.inter().copyWith(
+                        fontSize: 15,
+                        color: BaseColors.primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.right,
                     ),
+                  ),
+                  SizedBox(height: 20),
+                  Container(
+                    width: double.infinity,
+                    child: Text.rich(
+                      textAlign: TextAlign.center,
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Ketika masuk, Anda menyetujui ",
+                            style: GoogleFonts.inter().copyWith(
+                              fontSize: 15,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "Persyaratan Layanan ",
+                            style: GoogleFonts.inter().copyWith(
+                              fontSize: 15,
+                              color: BaseColors.primaryColor,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          TextSpan(
+                            text:
+                                "Dinotis & mengakui bahwa Pemberitahuan Privasi kami berlaku.",
+                            style: GoogleFonts.inter().copyWith(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    child: Text.rich(
+                        textAlign: TextAlign.center,
+                        TextSpan(children: [
+                          TextSpan(
+                            text: "Belum punya akun? ",
+                            style: GoogleFonts.inter().copyWith(
+                              fontSize: 15,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "Daftar di sini",
+                            style: GoogleFonts.inter().copyWith(
+                              fontSize: 15,
+                              color: BaseColors.primaryColor,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ])),
                   ),
                 ],
               ),
@@ -90,7 +140,7 @@ class LoginScreen extends StatelessWidget {
                 child: CustomButton(
                   child: Center(
                     child: Text(
-                      "Ubah Sekarang",
+                      "Masuk",
                       style: GoogleFonts.inter().copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

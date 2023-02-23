@@ -12,20 +12,17 @@ class RoleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Flexible(
-              child: Padding(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: Image.asset(
                   'assets/images/onboarding-text.png',
                   fit: BoxFit.fitWidth,
                 ),
               ),
-              flex: 2,
-            ),
-            Expanded(
-              child: Padding(
+              Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
                 child: Text(
@@ -36,9 +33,7 @@ class RoleScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-            Flexible(
-              child: Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +84,6 @@ class RoleScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(width: 5),
                             Icon(
                               UniconsLine.angle_right_b,
                               color: Colors.white,
@@ -133,7 +127,6 @@ class RoleScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(width: 5),
                           Icon(
                             UniconsLine.angle_right_b,
                             color: Colors.white,
@@ -145,9 +138,9 @@ class RoleScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              flex: 2,
-            ),
-          ],
+              SizedBox(height: 80),
+            ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motionhack/core/resources/colors.dart';
 import 'package:unicons/unicons.dart';
@@ -23,11 +23,7 @@ class ProfileCreatorScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          Icon(
-            UniconsLine.comment,
-            color: BaseColors.primaryColor,
-            size: 36,
-          ),
+          SvgPicture.asset('assets/svg/ic_info.svg'),
           SizedBox(width: 15),
         ],
         iconTheme: IconThemeData(color: Colors.black),

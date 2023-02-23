@@ -28,29 +28,31 @@ class OnboardOneScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Ngobrol bareng Kreator Hebat!",
-                        style: GoogleFonts.inter().copyWith(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: BaseColors.accentColor,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Ngobrol bareng Kreator Hebat!",
+                          style: GoogleFonts.inter().copyWith(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: BaseColors.accentColor,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Ketemuan dengan kreator hebat dari berbagai bidang? hanya disini tempatnya",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.inter().copyWith(
-                          fontSize: 15,
-                          color: Color(0xFFABABAB),
+                        SizedBox(
+                          height: 20,
                         ),
-                      ),
-                    ],
+                        Text(
+                          "Ketemuan dengan kreator hebat dari berbagai bidang? hanya disini tempatnya",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter().copyWith(
+                            fontSize: 15,
+                            color: Color(0xFFABABAB),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   flex: 1,
                 ),
