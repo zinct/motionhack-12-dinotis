@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motionhack/core/constant/router.dart';
 import 'package:motionhack/core/resources/colors.dart';
 import 'package:motionhack/core/widgets/custom_button.dart';
 import 'package:motionhack/core/widgets/custom_text_input.dart';
-import 'package:unicons/unicons.dart';
+import 'package:motionhack/features/auth/cubit/auth_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +61,19 @@ class LoginScreen extends StatelessWidget {
                       padding: EdgeInsets.all(20),
                       child: SvgPicture.asset('assets/svg/indonesia.svg'),
                     ),
+                    validator: (String? value) {
+                      return (value == null)
+                          ? 'Nomor handphone harus diisi!'
+                          : null;
+                    },
+                    controller: phoneController,
+                    keyboardType: TextInputType.number,
                   ),
                   SizedBox(height: 20),
                   CustomTextInput(
                     hintText: "Masukan kata sandi",
+                    obsecureText: true,
+                    controller: passwordController,
                   ),
                   SizedBox(height: 10),
                   Container(
@@ -135,25 +147,46 @@ class LoginScreen extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: CustomButton(
-                  child: Center(
-                    child: Text(
-                      "Masuk",
-                      style: GoogleFonts.inter().copyWith(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+              child: BlocConsumer<AuthCubit, AuthState>(
+                  listener: (context, state) {
+                print(state.user);
+                if (state.status == AuthStateStatus.done) {
+                  if (state.user != null) {
+                    Navigator.of(context).pushNamed(ROUTER.HOME);
+                  }
+                }
+              }, builder: ((context, state) {
+                if (state.status == AuthStateStatus.loading) {
+                  return Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    child: CustomButton(
+                      child: Center(
+                          child: CircularProgressIndicator(
                         color: Colors.white,
-                      ),
+                      )),
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pushReplacementNamed(ROUTER.HOME);
-                  },
-                ),
-              ),
+                  );
+                } else {
+                  return Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    child: CustomButton(
+                      child: Center(
+                        child: Text(
+                          "Masuk",
+                          style: GoogleFonts.inter().copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      onTap: () => context
+                          .read<AuthCubit>()
+                          .login(phoneController.text, passwordController.text),
+                    ),
+                  );
+                }
+              })),
             ),
           ],
         ),

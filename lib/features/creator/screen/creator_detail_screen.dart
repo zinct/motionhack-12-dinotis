@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motionhack/core/resources/colors.dart';
 import 'package:motionhack/core/resources/gradient.dart';
+import 'package:motionhack/features/creator/entities/creator.dart';
 import 'package:unicons/unicons.dart';
 
 class CreatorDetailScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class _CreatorDetailScreenState extends State<CreatorDetailScreen>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    var creator = ModalRoute.of(context)?.settings.arguments as Creator;
     TabController _tabController = TabController(length: 2, vsync: this);
 
     return Scaffold(
@@ -41,15 +43,16 @@ class _CreatorDetailScreenState extends State<CreatorDetailScreen>
                       width: 200,
                       height: 200,
                       child: ClipRRect(
-                        child: Image.asset(
-                          'assets/images/creator.png',
+                        borderRadius: BorderRadius.circular(666),
+                        child: Image.network(
+                          creator.profilePhoto,
                           fit: BoxFit.fill,
                         ),
                       ),
                     ),
                     SizedBox(height: 20),
                     Text(
-                      "Dr. Twelvest, SpOG-KFER, Msc",
+                      creator.name,
                       style: GoogleFonts.inter().copyWith(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,

@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:motionhack/core/constant/router.dart';
 import 'package:motionhack/core/resources/colors.dart';
+import 'package:motionhack/core/utils/http_overrides.dart';
 import 'package:motionhack/features/auth/cubit/auth_cubit.dart';
 import 'package:motionhack/features/auth/screen/login_screen.dart';
 import 'package:motionhack/features/creator/screen/creator_detail_screen.dart';
+import 'package:motionhack/features/event/screen/event_screen.dart';
 import 'package:motionhack/features/forum/screen/forum_detail_screen.dart';
 import 'package:motionhack/features/home/bloc/home_bloc.dart';
 import 'package:motionhack/features/home/screen/home_screen.dart';
@@ -20,6 +24,7 @@ import 'package:motionhack/features/user/screen/profile_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 
@@ -31,7 +36,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthCubit()),
-        BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(create: (context) => HomeBloc()..add(HomeEventFetching())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -54,6 +59,7 @@ class MyApp extends StatelessWidget {
           ROUTER.ROLE: (context) => RoleScreen(),
           ROUTER.FORUM_DETAIL: (context) => ForumDetailScreen(),
           ROUTER.CREATOR_DETAIL: (context) => CreatorDetailScreen(),
+          ROUTER.EVENT: (context) => EventScreen(),
         },
       ),
     );
