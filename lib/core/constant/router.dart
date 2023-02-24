@@ -11,4 +11,6 @@ class ROUTER {
   static const PROFILE_PASSWORD = '/profile-password';
   static const PROFILE_COIN = '/profile-coin';
   static const ROLE = '/role';
+  static const FORUM_DETAIL = '/forum-detail';
+  static const CREATOR_DETAIL = '/creator-detail';
 }

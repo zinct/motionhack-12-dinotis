@@ -47,6 +47,7 @@ dependencies:
   shimmer: ^2.0.0
   intl: ^0.18.0
   onboarding: ^3.1.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,7 @@ flutter:
     - assets/svg/
     - assets/images/
     - assets/images/profile/
+    - assets/images/slideshow/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -12,12 +12,6 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: BaseColors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.black),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

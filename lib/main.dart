@@ -4,6 +4,8 @@ import 'package:motionhack/core/constant/router.dart';
 import 'package:motionhack/core/resources/colors.dart';
 import 'package:motionhack/features/auth/cubit/auth_cubit.dart';
 import 'package:motionhack/features/auth/screen/login_screen.dart';
+import 'package:motionhack/features/creator/screen/creator_detail_screen.dart';
+import 'package:motionhack/features/forum/screen/forum_detail_screen.dart';
 import 'package:motionhack/features/home/bloc/home_bloc.dart';
 import 'package:motionhack/features/home/screen/home_screen.dart';
 import 'package:motionhack/features/intro/screen/onboard_one_screen.dart';
@@ -50,6 +52,8 @@ class MyApp extends StatelessWidget {
           ROUTER.PROFILE_COIN: (context) => ProfileCoinScreen(),
           ROUTER.PROFILE_PASSWORD: (context) => ProfilePasswordScreen(),
           ROUTER.ROLE: (context) => RoleScreen(),
+          ROUTER.FORUM_DETAIL: (context) => ForumDetailScreen(),
+          ROUTER.CREATOR_DETAIL: (context) => CreatorDetailScreen(),
         },
       ),
     );

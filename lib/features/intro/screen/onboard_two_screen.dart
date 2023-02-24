@@ -90,7 +90,7 @@ class OnboardTwoScreen extends StatelessWidget {
                         margin: EdgeInsets.symmetric(horizontal: 60),
                         child: CustomButton(
                           onTap: () => Navigator.of(context)
-                              .pushReplacementNamed(ROUTER.ROLE),
+                              .pushReplacementNamed(ROUTER.HOME),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
