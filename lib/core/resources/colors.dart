@@ -8,4 +8,5 @@ class BaseColors {
   static Color backgroundColor = Color(0xFFFAF8FF);
   static Color fontBlack = Color(0xFF000000);
   static Color inputBorder = Color(0xFFE2E8F0);
+  static Color meetingColor = Color(0xFF1E1E1E);
 }

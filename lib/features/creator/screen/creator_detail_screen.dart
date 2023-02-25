@@ -173,13 +173,13 @@ class _CreatorDetailScreenState extends State<CreatorDetailScreen>
                             Row(
                               children: [
                                 Icon(
-                                  UniconsLine.clock,
+                                  UniconsLine.users_alt,
                                   color: BaseColors.primaryColor,
                                   size: 30,
                                 ),
                                 SizedBox(width: 10),
                                 Text(
-                                  "19:00 - 20:00",
+                                  "200 Peserta",
                                   style: GoogleFonts.inter().copyWith(
                                     fontSize: 16,
                                   ),

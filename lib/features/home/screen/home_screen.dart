@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
+      backgroundColor: BaseColors.backgroundColor,
       body: SafeArea(
         child: body[currentIndex],
       ),

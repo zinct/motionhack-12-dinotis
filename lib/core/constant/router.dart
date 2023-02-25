@@ -14,4 +14,6 @@ class ROUTER {
   static const FORUM_DETAIL = '/forum-detail';
   static const CREATOR_DETAIL = '/creator-detail';
   static const EVENT = '/event';
+  static const MEETING_DETAIL = '/meeting-detail';
+  static const MEETING_LINE = '/meeting-line';
 }
