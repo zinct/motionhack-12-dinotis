@@ -39,6 +39,7 @@ class OnboardOneScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: BaseColors.accentColor,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                         SizedBox(
                           height: 20,

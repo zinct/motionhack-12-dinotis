@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:motionhack/core/constant/router.dart';
 import 'package:motionhack/core/resources/colors.dart';
 import 'package:motionhack/core/resources/gradient.dart';
+import 'package:motionhack/core/widgets/custom_button.dart';
 import 'package:motionhack/features/auth/cubit/auth_cubit.dart';
 import 'package:unicons/unicons.dart';
 
@@ -90,22 +91,27 @@ class UnauthenticatedProfileWidget extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 10),
-                          Container(
-                            width: 109,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color: Colors.white,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Daftar",
-                                style: GoogleFonts.inter().copyWith(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pushNamed(ROUTER.REGISTER);
+                            },
+                            child: Container(
+                              width: 109,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
                                   color: Colors.white,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Daftar",
+                                  style: GoogleFonts.inter().copyWith(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
@@ -427,7 +433,104 @@ class AuthenticatedProfileWidget extends StatelessWidget {
                         UniconsLine.angle_left,
                         size: 30,
                       ),
-                      onTap: () => context.read<AuthCubit>().logout(),
+                      onTap: () async {
+                        await showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return Container(
+                                padding: EdgeInsets.symmetric(horizontal: 30),
+                                color: Colors.white,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
+                                      width: 180,
+                                      height: 180,
+                                      child: Image.asset(
+                                        'assets/images/logout-modal.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(
+                                      "Kamu mau keluar ?",
+                                      style: GoogleFonts.inter().copyWith(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(
+                                      "Jangan lama-lama ya... Dinotis bakal rindu kamu.",
+                                      style: GoogleFonts.inter().copyWith(
+                                        fontSize: 15,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    SizedBox(height: 20),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: CustomButton(
+                                            onTap: () =>
+                                                Navigator.of(context).pop(),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                color: BaseColors.primaryColor,
+                                              ),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                "Batalkan",
+                                                style: GoogleFonts.inter()
+                                                    .copyWith(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                  color:
+                                                      BaseColors.primaryColor,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: 20),
+                                        Expanded(
+                                          child: CustomButton(
+                                            onTap: () {
+                                              context
+                                                  .read<AuthCubit>()
+                                                  .logout();
+                                            },
+                                            child: Center(
+                                              child: Text(
+                                                "Keluar",
+                                                style: GoogleFonts.inter()
+                                                    .copyWith(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                      },
                     ),
                     Divider(),
                     BlocListener<AuthCubit, AuthState>(

@@ -20,15 +20,27 @@ class EventBloc extends Bloc<EventEvent, EventState> {
   EventBloc() : super(EventState()) {
     on<EventEventFetching>((event, emit) async {
       emit(state.copyWith(status: EventStateStatus.loading));
-      CreatorListModel creatorData = await _creatorRepository.getList();
+      CreatorListModel creatorData = await _creatorRepository.getList(null);
       MeetingListModel meetingData = await _meetingRepository.getList();
       ProfessionListModel professionData =
           await _professionRepository.getList();
       emit(state.copyWith(
         status: EventStateStatus.done,
         creators: creatorData.creators,
+        topCreators: creatorData.creators,
         meetings: meetingData.meetings,
         professions: professionData.professions,
+      ));
+    });
+
+    on<EventEventSearching>((event, emit) async {
+      emit(state.copyWith(status: EventStateStatus.loading));
+      CreatorListModel creatorData =
+          await _creatorRepository.getList(event.creator);
+      emit(state.copyWith(
+        status: EventStateStatus.done,
+        creators: creatorData.creators,
+        search: event.creator,
       ));
     });
   }

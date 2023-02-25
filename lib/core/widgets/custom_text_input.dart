@@ -10,6 +10,7 @@ class CustomTextInput extends StatelessWidget {
   final controller;
   final TextInputType? keyboardType;
   final bool obsecureText;
+  final onFieldSubmitted;
 
   const CustomTextInput({
     super.key,
@@ -18,6 +19,7 @@ class CustomTextInput extends StatelessWidget {
     this.validator,
     this.controller,
     this.keyboardType,
+    this.onFieldSubmitted,
     this.obsecureText = false,
   });
 
@@ -31,6 +33,12 @@ class CustomTextInput extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.black.withOpacity(.2),
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
           ),
           borderRadius: BorderRadius.circular(10),
         ),
@@ -51,6 +59,7 @@ class CustomTextInput extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       obscureText: obsecureText,
+      onFieldSubmitted: onFieldSubmitted,
     );
   }
 }

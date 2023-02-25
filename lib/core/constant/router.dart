@@ -4,6 +4,7 @@ class ROUTER {
   static const ONBOARDING_TWO = '/onboarding-two';
   static const HOME = '/home';
   static const LOGIN = '/login';
+  static const REGISTER = '/register';
   static const PROFILE = '/profile';
   static const PROFILE_EDIT = '/profile-edit';
   static const PROFILE_CREATOR = '/profile-creator';
@@ -16,5 +17,9 @@ class ROUTER {
   static const EVENT = '/event';
   static const MEETING_DETAIL = '/meeting-detail';
   static const MEETING_LINE = '/meeting-line';
+  static const MEETING_BOOKING = '/meeting-booking';
+  static const MEETING_PAYMENT = '/meeting-payment';
+  static const MEETING_PAYMENT_SUCCESS = '/meeting-payment-success';
   static const NOTIFICATION = '/notification';
+  static const FORGOT_PASSWORD = '/forgot-password';
 }

@@ -8,8 +8,8 @@ import 'package:motionhack/core/widgets/custom_button.dart';
 import 'package:motionhack/core/widgets/custom_text_input.dart';
 import 'package:motionhack/features/auth/cubit/auth_cubit.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  RegisterScreen({super.key});
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     SizedBox(height: 20),
                     Text(
-                      "Masuk Akun",
+                      "Daftar Akun",
                       style: GoogleFonts.inter().copyWith(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      "Silahkan masukan nomor handphone & kata sandi akun anda yang telah terdaftar untuk masuk ke aplikasi",
+                      "Masukan nomor handphone yang valid untuk mendapatkan kode OTP",
                       style: GoogleFonts.inter().copyWith(
                         fontSize: 15,
                       ),
@@ -74,37 +74,7 @@ class LoginScreen extends StatelessWidget {
                       controller: phoneController,
                       keyboardType: TextInputType.number,
                     ),
-                    SizedBox(height: 20),
-                    CustomTextInput(
-                      hintText: "Masukan kata sandi",
-                      obsecureText: true,
-                      controller: passwordController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Password harus di isi!';
-                        }
-                        return null;
-                      },
-                    ),
                     SizedBox(height: 10),
-                    InkWell(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(ROUTER.FORGOT_PASSWORD),
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      child: Container(
-                        width: double.infinity,
-                        child: Text(
-                          "Lupa kata sandi?",
-                          style: GoogleFonts.inter().copyWith(
-                            fontSize: 15,
-                            color: BaseColors.primaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.right,
-                        ),
-                      ),
-                    ),
                     SizedBox(height: 20),
                     Container(
                       width: double.infinity,
@@ -142,27 +112,28 @@ class LoginScreen extends StatelessWidget {
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () =>
-                          Navigator.of(context).pushNamed(ROUTER.REGISTER),
+                          Navigator.of(context).pushNamed(ROUTER.LOGIN),
                       child: Container(
                         width: double.infinity,
                         child: Text.rich(
-                            textAlign: TextAlign.center,
-                            TextSpan(children: [
-                              TextSpan(
-                                text: "Belum punya akun? ",
-                                style: GoogleFonts.inter().copyWith(
-                                  fontSize: 15,
-                                ),
+                          textAlign: TextAlign.center,
+                          TextSpan(children: [
+                            TextSpan(
+                              text: "Sudah punya akun? ",
+                              style: GoogleFonts.inter().copyWith(
+                                fontSize: 15,
                               ),
-                              TextSpan(
-                                text: "Daftar di sini",
-                                style: GoogleFonts.inter().copyWith(
-                                  fontSize: 15,
-                                  color: BaseColors.primaryColor,
-                                  decoration: TextDecoration.underline,
-                                ),
+                            ),
+                            TextSpan(
+                              text: "Masuk di sini",
+                              style: GoogleFonts.inter().copyWith(
+                                fontSize: 15,
+                                color: BaseColors.primaryColor,
+                                decoration: TextDecoration.underline,
                               ),
-                            ])),
+                            ),
+                          ]),
+                        ),
                       ),
                     ),
                   ],

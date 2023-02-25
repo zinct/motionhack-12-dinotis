@@ -12,8 +12,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeState()) {
     on<HomeEventFetching>((event, emit) async {
       emit(state.copyWith(status: HomeStateStatus.loading));
-      CreatorListModel data = await _creatorRepository.getList();
-      print(data.creators);
+      CreatorListModel data = await _creatorRepository.getList(null);
       emit(state.copyWith(
         status: HomeStateStatus.done,
         creators: data.creators,

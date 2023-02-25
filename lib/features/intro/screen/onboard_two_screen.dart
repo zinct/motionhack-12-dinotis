@@ -28,29 +28,32 @@ class OnboardTwoScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Kapan saja dan di mana saja",
-                        style: GoogleFonts.inter().copyWith(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: BaseColors.accentColor,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Kapan saja dan di mana saja",
+                          style: GoogleFonts.inter().copyWith(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: BaseColors.accentColor,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Denger suara doang emang puas? Kalau ngobrol di sini bisa sambil tatap-tatapan! Sebelumnya",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.inter().copyWith(
-                          fontSize: 15,
-                          color: Color(0xFFABABAB),
+                        SizedBox(
+                          height: 20,
                         ),
-                      ),
-                    ],
+                        Text(
+                          "Denger suara doang emang puas? Kalau ngobrol di sini bisa sambil tatap-tatapan! Sebelumnya",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter().copyWith(
+                            fontSize: 15,
+                            color: Color(0xFFABABAB),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   flex: 1,
                 ),

@@ -6,7 +6,9 @@ import 'package:motionhack/core/constant/router.dart';
 import 'package:motionhack/core/resources/colors.dart';
 import 'package:motionhack/core/utils/http_overrides.dart';
 import 'package:motionhack/features/auth/cubit/auth_cubit.dart';
+import 'package:motionhack/features/auth/screen/forgot_password_screen.dart';
 import 'package:motionhack/features/auth/screen/login_screen.dart';
+import 'package:motionhack/features/auth/screen/register_screen.dart';
 import 'package:motionhack/features/creator/screen/creator_detail_screen.dart';
 import 'package:motionhack/features/event/bloc/event_bloc.dart';
 import 'package:motionhack/features/event/screen/event_screen.dart';
@@ -17,8 +19,11 @@ import 'package:motionhack/features/intro/screen/onboard_one_screen.dart';
 import 'package:motionhack/features/intro/screen/onboard_two_screen.dart';
 import 'package:motionhack/features/intro/screen/role_screen.dart';
 import 'package:motionhack/features/intro/screen/splash_screen.dart';
+import 'package:motionhack/features/meeting/screen/meeting_booking_screen.dart';
 import 'package:motionhack/features/meeting/screen/meeting_detail_screen.dart';
 import 'package:motionhack/features/meeting/screen/meeting_line_screen.dart';
+import 'package:motionhack/features/meeting/screen/meeting_payment_screen.dart';
+import 'package:motionhack/features/meeting/screen/meeting_payment_success_screen.dart';
 import 'package:motionhack/features/notification/screen/notification_screen.dart';
 import 'package:motionhack/features/user/screen/profile_coin_screen.dart';
 import 'package:motionhack/features/user/screen/profile_creator_screen.dart';
@@ -46,7 +51,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: ROUTER.ONBOARDING_ONE,
+        initialRoute: ROUTER.SPLASH,
         theme: ThemeData(
           primaryColor: BaseColors.primaryColor,
           // primarySwatch: BaseColors.primaryColor,
@@ -56,6 +61,8 @@ class MyApp extends StatelessWidget {
           ROUTER.ONBOARDING_ONE: (context) => OnboardOneScreen(),
           ROUTER.ONBOARDING_TWO: (context) => OnboardTwoScreen(),
           ROUTER.LOGIN: (context) => LoginScreen(),
+          ROUTER.REGISTER: (context) => RegisterScreen(),
+          ROUTER.FORGOT_PASSWORD: (context) => ForgotPasswordScreen(),
           ROUTER.HOME: (context) => HomeScreen(),
           ROUTER.PROFILE: (context) => ProfileScreen(),
           ROUTER.PROFILE_EDIT: (context) => ProfileEditScreen(),
@@ -68,6 +75,10 @@ class MyApp extends StatelessWidget {
           ROUTER.EVENT: (context) => EventScreen(),
           ROUTER.MEETING_DETAIL: (context) => MeetingDetailScreen(),
           ROUTER.MEETING_LINE: (context) => MeetingLineScreen(),
+          ROUTER.MEETING_BOOKING: (context) => MeetingBookingScreen(),
+          ROUTER.MEETING_PAYMENT: (context) => MeetingPaymentScreen(),
+          ROUTER.MEETING_PAYMENT_SUCCESS: (context) =>
+              MeetingPaymentSuccessScreen(),
           ROUTER.NOTIFICATION: (context) => NotificationScreen(),
         },
       ),

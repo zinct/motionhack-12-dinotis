@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motionhack/core/constant/router.dart';
 import 'package:motionhack/core/resources/colors.dart';
 import 'package:motionhack/core/resources/gradient.dart';
+import 'package:motionhack/features/auth/cubit/auth_cubit.dart';
 import 'package:motionhack/features/creator/entities/creator.dart';
 import 'package:unicons/unicons.dart';
 
@@ -125,15 +128,15 @@ class _CreatorDetailScreenState extends State<CreatorDetailScreen>
                               child: Row(
                                 children: [
                                   VideoCallTime(),
-                                  SizedBox(width: 20),
+                                  SizedBox(width: 10),
                                   VideoCallTime(),
-                                  SizedBox(width: 20),
+                                  SizedBox(width: 10),
                                   VideoCallTime(),
-                                  SizedBox(width: 20),
+                                  SizedBox(width: 10),
                                   VideoCallTime(),
-                                  SizedBox(width: 20),
+                                  SizedBox(width: 10),
                                   VideoCallTime(),
-                                  SizedBox(width: 20),
+                                  SizedBox(width: 10),
                                 ],
                               ),
                             ),
@@ -173,7 +176,7 @@ class _CreatorDetailScreenState extends State<CreatorDetailScreen>
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 8),
                             Row(
                               children: [
                                 Icon(
@@ -190,7 +193,7 @@ class _CreatorDetailScreenState extends State<CreatorDetailScreen>
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
+                            SizedBox(height: 8),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -214,26 +217,74 @@ class _CreatorDetailScreenState extends State<CreatorDetailScreen>
                                     ],
                                   ),
                                 ),
-                                Container(
-                                  height: 40,
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 30,
-                                    vertical: 5,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    gradient: BaseGradient.primaryGradient,
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "Booking",
-                                      style: GoogleFonts.inter().copyWith(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
+                                BlocBuilder<AuthCubit, AuthState>(
+                                  builder: (context, state) {
+                                    if (state.status ==
+                                            AuthStateStatus.logout ||
+                                        state.user == null) {
+                                      return InkWell(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .pushNamed(ROUTER.LOGIN);
+                                        },
+                                        child: Container(
+                                          height: 40,
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 30,
+                                            vertical: 5,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            gradient:
+                                                BaseGradient.primaryGradient,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "Booking",
+                                              style:
+                                                  GoogleFonts.inter().copyWith(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      return InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).pushNamed(
+                                              ROUTER.MEETING_BOOKING);
+                                        },
+                                        child: Container(
+                                          height: 40,
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 30,
+                                            vertical: 5,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            gradient:
+                                                BaseGradient.primaryGradient,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "Booking",
+                                              style:
+                                                  GoogleFonts.inter().copyWith(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
                                 ),
                               ],
                             ),

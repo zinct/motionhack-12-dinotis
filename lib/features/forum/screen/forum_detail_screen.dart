@@ -18,6 +18,7 @@ class ForumDetailScreen extends StatelessWidget {
       ),
       body: SafeArea(
           child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(25),
           child: Column(

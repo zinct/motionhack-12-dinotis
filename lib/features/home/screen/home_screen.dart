@@ -44,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) {
-          print(index);
           setState(() => currentIndex = index);
         },
         selectedItemColor: BaseColors.primaryColor,
@@ -133,10 +132,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
 
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
+    TabController _tabController = TabController(length: 2, vsync: this);
+
     return RefreshIndicator(
       color: BaseColors.primaryColor,
       onRefresh: () async {
@@ -232,6 +238,36 @@ class HomeTab extends StatelessWidget {
                     }
                   })),
                   SizedBox(height: 20),
+                  TabBar(
+                    labelColor: Colors.black,
+                    indicatorColor: BaseColors.primaryColor,
+                    controller: _tabController,
+                    tabs: [
+                      Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          "On The Top",
+                          style: GoogleFonts.inter().copyWith(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          "New Rising",
+                          style: GoogleFonts.inter().copyWith(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
                   BlocBuilder<HomeBloc, HomeState>(builder: ((context, state) {
                     if (state.status == HomeStateStatus.done &&
                         state.topCreators.length > 0) {
@@ -242,35 +278,76 @@ class HomeTab extends StatelessWidget {
                           children: [
                             Expanded(
                               flex: 3,
-                              child: Container(
-                                child: Column(
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                      ROUTER.CREATOR_DETAIL,
+                                      arguments: state.topCreators[0]);
+                                },
+                                child: Stack(
                                   children: [
                                     Container(
-                                      height: 130,
-                                      width: double.infinity,
-                                      child: Image.network(
-                                        creator.profilePhoto,
-                                        fit: BoxFit.cover,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 130,
+                                            width: double.infinity,
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(8),
+                                                topRight: Radius.circular(8),
+                                              ),
+                                              child: Image.network(
+                                                creator.profilePhoto,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: double.infinity,
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              gradient:
+                                                  BaseGradient.primaryGradient,
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(8),
+                                                bottomRight: Radius.circular(8),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              creator.name,
+                                              style:
+                                                  GoogleFonts.inter().copyWith(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                              overflow: TextOverflow.clip,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     Container(
-                                      width: double.infinity,
-                                      padding: EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        gradient: BaseGradient.primaryGradient,
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        creator.name,
-                                        style: GoogleFonts.inter().copyWith(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                        overflow: TextOverflow.clip,
+                                      width: 40,
+                                      height: 40,
+                                      margin: EdgeInsets.all(5),
+                                      child: Stack(
+                                        children: [
+                                          Image.asset('assets/images/star.png'),
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              "1",
+                                              style:
+                                                  GoogleFonts.inter().copyWith(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -292,30 +369,51 @@ class HomeTab extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Jangan lewatkan kesempatan sesi eksklusif bersama kreator nomor 1 minggu ini",
+                                      "Jangan lewatkan",
                                       style: GoogleFonts.inter().copyWith(
                                         fontSize: 13,
-                                        color: Colors.black,
+                                        color: BaseColors.primaryColor,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      textAlign: TextAlign.center,
+                                      textAlign: TextAlign.right,
                                     ),
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 5,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        gradient: BaseGradient.primaryGradient,
-                                      ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15),
                                       child: Text(
-                                        "Booking Sekarang!",
+                                        "kesempatan sesi eksklusif dengan Milford Ritchie",
                                         style: GoogleFonts.inter().copyWith(
                                           fontSize: 13,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
                                         ),
-                                        textAlign: TextAlign.center,
+                                        textAlign: TextAlign.right,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).pushNamed(
+                                            ROUTER.CREATOR_DETAIL,
+                                            arguments: state.creators[0]);
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 5,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          gradient:
+                                              BaseGradient.primaryGradient,
+                                        ),
+                                        child: Text(
+                                          "Booking Sekarang!",
+                                          style: GoogleFonts.inter().copyWith(
+                                            fontSize: 13,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -343,45 +441,87 @@ class HomeTab extends StatelessWidget {
                                       ROUTER.CREATOR_DETAIL,
                                       arguments: e,
                                     ),
-                                    child: Container(
-                                      width: 81,
-                                      height: 81,
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 60,
-                                            width: double.infinity,
-                                            child: Image.network(
-                                              e.profilePhoto,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          Container(
-                                            width: double.infinity,
-                                            height: 21,
-                                            decoration: BoxDecoration(
-                                              gradient:
-                                                  BaseGradient.primaryGradient,
-                                              borderRadius: BorderRadius.only(
-                                                bottomLeft: Radius.circular(5),
-                                                bottomRight: Radius.circular(5),
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                e.name,
-                                                style: GoogleFonts.inter()
-                                                    .copyWith(
-                                                  fontSize: 9,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          width: 81,
+                                          height: 81,
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                height: 60,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topLeft: Radius.circular(8),
+                                                    topRight:
+                                                        Radius.circular(8),
+                                                  ),
+                                                  child: Image.network(
+                                                    e.profilePhoto,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
-                                                overflow: TextOverflow.clip,
                                               ),
-                                            ),
+                                              Container(
+                                                width: double.infinity,
+                                                height: 21,
+                                                decoration: BoxDecoration(
+                                                  gradient: BaseGradient
+                                                      .primaryGradient,
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(5),
+                                                    bottomRight:
+                                                        Radius.circular(5),
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    e.name,
+                                                    style: GoogleFonts.inter()
+                                                        .copyWith(
+                                                      fontSize: 9,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.white,
+                                                    ),
+                                                    overflow: TextOverflow.clip,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        Container(
+                                          width: 20,
+                                          height: 20,
+                                          margin: EdgeInsets.all(5),
+                                          child: Stack(
+                                            children: [
+                                              Image.asset(
+                                                  'assets/images/star.png'),
+                                              Align(
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  (state.topCreators
+                                                              .indexOf(e) +
+                                                          1)
+                                                      .toString(),
+                                                  style: GoogleFonts.inter()
+                                                      .copyWith(
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ))
@@ -401,11 +541,43 @@ class HomeTab extends StatelessWidget {
                           height: 200,
                         ),
                         items: [1, 2, 3].map((i) {
+                          String url = '';
+                          if (i == 1) {
+                            url = 'bisa-ngapain';
+                          } else if (i == 2) {
+                            url = 'ngobrol-bareng';
+                          } else {
+                            url = 'punya-pertanyaan';
+                          }
                           return Container(
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Image.asset(
-                                'assets/images/slideshow/bisa-ngapain.png',
+                                "assets/images/slideshow/${url}.png",
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    else
+                      return SlideshowShimmer();
+                  })),
+                  BlocBuilder<HomeBloc, HomeState>(builder: ((context, state) {
+                    if (state.status == HomeStateStatus.done &&
+                        state.topCreators.length > 0)
+                      return CarouselSlider(
+                        options: CarouselOptions(
+                          viewportFraction: 1,
+                          enlargeCenterPage: true,
+                          height: 200,
+                        ),
+                        items: [1, 2, 3].map((i) {
+                          return Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/images/slideshow/ngobrol-bareng.png',
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
