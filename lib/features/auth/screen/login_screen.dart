@@ -149,9 +149,10 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
-                print(state.user);
                 if (state.status == AuthStateStatus.done) {
                   if (state.user != null) {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                     Navigator.of(context).pushNamed(ROUTER.HOME);
                   }
                 }

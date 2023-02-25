@@ -42,6 +42,7 @@ class ForumChatTab extends StatelessWidget {
           SizedBox(height: 20),
           Expanded(
             child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
                   ForumChatItem(),
