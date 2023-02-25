@@ -25,10 +25,18 @@ class CustomTextInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
         prefixIcon: prefixIcon,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.black.withOpacity(.2),
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
           ),
           borderRadius: BorderRadius.circular(10),
         ),

@@ -8,7 +8,7 @@ import 'package:motionhack/core/utils/http_overrides.dart';
 import 'package:motionhack/features/auth/cubit/auth_cubit.dart';
 import 'package:motionhack/features/auth/screen/login_screen.dart';
 import 'package:motionhack/features/creator/screen/creator_detail_screen.dart';
-import 'package:motionhack/features/event/cubit/event_cubit.dart';
+import 'package:motionhack/features/event/bloc/event_bloc.dart';
 import 'package:motionhack/features/event/screen/event_screen.dart';
 import 'package:motionhack/features/forum/screen/forum_detail_screen.dart';
 import 'package:motionhack/features/home/bloc/home_bloc.dart';
@@ -19,6 +19,7 @@ import 'package:motionhack/features/intro/screen/role_screen.dart';
 import 'package:motionhack/features/intro/screen/splash_screen.dart';
 import 'package:motionhack/features/meeting/screen/meeting_detail_screen.dart';
 import 'package:motionhack/features/meeting/screen/meeting_line_screen.dart';
+import 'package:motionhack/features/notification/screen/notification_screen.dart';
 import 'package:motionhack/features/user/screen/profile_coin_screen.dart';
 import 'package:motionhack/features/user/screen/profile_creator_screen.dart';
 import 'package:motionhack/features/user/screen/profile_edit_screen.dart';
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthCubit()),
-        BlocProvider(create: (context) => EventCubit()..fetchData()),
+        BlocProvider(
+            create: (context) => EventBloc()..add(EventEventFetching())),
         BlocProvider(create: (context) => HomeBloc()..add(HomeEventFetching())),
       ],
       child: MaterialApp(
@@ -66,6 +68,7 @@ class MyApp extends StatelessWidget {
           ROUTER.EVENT: (context) => EventScreen(),
           ROUTER.MEETING_DETAIL: (context) => MeetingDetailScreen(),
           ROUTER.MEETING_LINE: (context) => MeetingLineScreen(),
+          ROUTER.NOTIFICATION: (context) => NotificationScreen(),
         },
       ),
     );

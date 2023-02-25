@@ -144,256 +144,281 @@ class HomeTab extends StatelessWidget {
       },
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-          child: Column(
-            children: [
-              BlocBuilder<AuthCubit, AuthState>(builder: ((context, state) {
-                if (state.status == AuthStateStatus.logout ||
-                    state.user == null) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Selamat Datang!",
-                        style: GoogleFonts.inter().copyWith(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  );
-                } else {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Halo,",
-                            style: GoogleFonts.inter().copyWith(
-                              fontSize: 15,
-                            ),
-                          ),
-                          Text(
-                            state.user!.name,
-                            style: GoogleFonts.inter().copyWith(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SvgPicture.asset('assets/svg/ic_notification.svg'),
-                    ],
-                  );
-                }
-              })),
-              SizedBox(height: 30),
-              CustomTextInput(
-                hintText: "Cari kreator pilihanmu disini...",
-                prefixIcon: Icon(
-                  UniconsLine.search,
-                  color: BaseColors.primaryColor,
-                ),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+              decoration: BoxDecoration(
+                gradient: BaseGradient.primaryGradient,
               ),
-              SizedBox(height: 20),
-              BlocBuilder<AuthCubit, AuthState>(builder: ((context, state) {
-                if (state.status == AuthStateStatus.done) {
-                  if (state.user == null)
-                    return HeroShimmer();
-                  else
-                    return UserStatsWidget();
-                } else {
-                  return Container();
-                }
-              })),
-              SizedBox(height: 20),
-              BlocBuilder<HomeBloc, HomeState>(builder: ((context, state) {
-                if (state.status == HomeStateStatus.done &&
-                    state.topCreators.length > 0) {
-                  var creator = state.topCreators[0];
-                  return Container(
-                    width: double.infinity,
-                    child: Row(
+              child: Column(children: [
+                BlocBuilder<AuthCubit, AuthState>(builder: ((context, state) {
+                  if (state.status == AuthStateStatus.logout ||
+                      state.user == null) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 130,
-                                  width: double.infinity,
-                                  child: Image.network(
-                                    creator.profilePhoto,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Container(
-                                  width: double.infinity,
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    gradient: BaseGradient.primaryGradient,
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(8),
-                                      bottomRight: Radius.circular(8),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    creator.name,
-                                    style: GoogleFonts.inter().copyWith(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                    overflow: TextOverflow.clip,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Color(0xFFE0CDFF),
-                            ),
-                            height: 175,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Jangan lewatkan kesempatan sesi eksklusif bersama kreator nomor 1 minggu ini",
-                                  style: GoogleFonts.inter().copyWith(
-                                    fontSize: 13,
-                                    color: Colors.black,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 5,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    gradient: BaseGradient.primaryGradient,
-                                  ),
-                                  child: Text(
-                                    "Booking Sekarang!",
-                                    style: GoogleFonts.inter().copyWith(
-                                      fontSize: 13,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
-                            ),
+                        Text(
+                          "Selamat Datang!",
+                          style: GoogleFonts.inter().copyWith(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                       ],
-                    ),
-                  );
-                } else
-                  return HeroShimmer();
-              })),
-              SizedBox(height: 20),
-              BlocBuilder<HomeBloc, HomeState>(builder: ((context, state) {
-                if (state.status == HomeStateStatus.done &&
-                    state.topCreators.length > 0)
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: state.topCreators
-                        .sublist(1, 5)
-                        .map((e) => Flexible(
-                              child: InkWell(
-                                onTap: () => Navigator.of(context).pushNamed(
-                                  ROUTER.CREATOR_DETAIL,
-                                  arguments: e,
-                                ),
-                                child: Container(
-                                  width: 81,
-                                  height: 81,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 60,
-                                        width: double.infinity,
-                                        child: Image.network(
-                                          e.profilePhoto,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: double.infinity,
-                                        height: 21,
-                                        decoration: BoxDecoration(
-                                          gradient:
-                                              BaseGradient.primaryGradient,
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(5),
-                                            bottomRight: Radius.circular(5),
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            e.name,
-                                            style: GoogleFonts.inter().copyWith(
-                                              fontSize: 9,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            overflow: TextOverflow.clip,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                    );
+                  } else {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Halo,",
+                              style: GoogleFonts.inter().copyWith(
+                                fontSize: 15,
+                                color: Colors.white,
                               ),
-                            ))
-                        .toList(),
-                  );
-                else
-                  return TopCreatorShimmer();
-              })),
-              SizedBox(height: 20),
-              BlocBuilder<HomeBloc, HomeState>(builder: ((context, state) {
-                if (state.status == HomeStateStatus.done &&
-                    state.topCreators.length > 0)
-                  return CarouselSlider(
-                    options: CarouselOptions(
-                      viewportFraction: 1,
-                      enlargeCenterPage: true,
-                      height: 200,
-                    ),
-                    items: [1, 2, 3].map((i) {
-                      return Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            'assets/images/slideshow/bisa-ngapain.png',
-                            fit: BoxFit.fitWidth,
+                            ),
+                            Text(
+                              state.user!.name,
+                              style: GoogleFonts.inter().copyWith(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        InkWell(
+                          onTap: () => Navigator.of(context)
+                              .pushNamed(ROUTER.NOTIFICATION),
+                          child: SvgPicture.asset(
+                            'assets/svg/ic_notification.svg',
+                            color: Colors.white,
                           ),
                         ),
+                      ],
+                    );
+                  }
+                })),
+                SizedBox(height: 30),
+                CustomTextInput(
+                  hintText: "Cari kreator pilihanmu disini...",
+                  prefixIcon: Icon(
+                    UniconsLine.search,
+                    color: Color(0xFF1F0E31),
+                  ),
+                ),
+              ]),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  BlocBuilder<AuthCubit, AuthState>(builder: ((context, state) {
+                    if (state.status == AuthStateStatus.done) {
+                      if (state.user == null)
+                        return HeroShimmer();
+                      else
+                        return UserStatsWidget();
+                    } else {
+                      return Container();
+                    }
+                  })),
+                  SizedBox(height: 20),
+                  BlocBuilder<HomeBloc, HomeState>(builder: ((context, state) {
+                    if (state.status == HomeStateStatus.done &&
+                        state.topCreators.length > 0) {
+                      var creator = state.topCreators[0];
+                      return Container(
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 130,
+                                      width: double.infinity,
+                                      child: Image.network(
+                                        creator.profilePhoto,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Container(
+                                      width: double.infinity,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        gradient: BaseGradient.primaryGradient,
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(8),
+                                          bottomRight: Radius.circular(8),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        creator.name,
+                                        style: GoogleFonts.inter().copyWith(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                        overflow: TextOverflow.clip,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Color(0xFFE0CDFF),
+                                ),
+                                height: 175,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Jangan lewatkan kesempatan sesi eksklusif bersama kreator nomor 1 minggu ini",
+                                      style: GoogleFonts.inter().copyWith(
+                                        fontSize: 13,
+                                        color: Colors.black,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 5,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        gradient: BaseGradient.primaryGradient,
+                                      ),
+                                      child: Text(
+                                        "Booking Sekarang!",
+                                        style: GoogleFonts.inter().copyWith(
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       );
-                    }).toList(),
-                  );
-                else
-                  return SlideshowShimmer();
-              })),
-            ],
-          ),
+                    } else
+                      return HeroShimmer();
+                  })),
+                  SizedBox(height: 20),
+                  BlocBuilder<HomeBloc, HomeState>(builder: ((context, state) {
+                    if (state.status == HomeStateStatus.done &&
+                        state.topCreators.length > 0)
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: state.topCreators
+                            .sublist(1, 5)
+                            .map((e) => Flexible(
+                                  child: InkWell(
+                                    onTap: () =>
+                                        Navigator.of(context).pushNamed(
+                                      ROUTER.CREATOR_DETAIL,
+                                      arguments: e,
+                                    ),
+                                    child: Container(
+                                      width: 81,
+                                      height: 81,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 60,
+                                            width: double.infinity,
+                                            child: Image.network(
+                                              e.profilePhoto,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Container(
+                                            width: double.infinity,
+                                            height: 21,
+                                            decoration: BoxDecoration(
+                                              gradient:
+                                                  BaseGradient.primaryGradient,
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(5),
+                                                bottomRight: Radius.circular(5),
+                                              ),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                e.name,
+                                                style: GoogleFonts.inter()
+                                                    .copyWith(
+                                                  fontSize: 9,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                                overflow: TextOverflow.clip,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                      );
+                    else
+                      return TopCreatorShimmer();
+                  })),
+                  SizedBox(height: 20),
+                  BlocBuilder<HomeBloc, HomeState>(builder: ((context, state) {
+                    if (state.status == HomeStateStatus.done &&
+                        state.topCreators.length > 0)
+                      return CarouselSlider(
+                        options: CarouselOptions(
+                          viewportFraction: 1,
+                          enlargeCenterPage: true,
+                          height: 200,
+                        ),
+                        items: [1, 2, 3].map((i) {
+                          return Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/images/slideshow/bisa-ngapain.png',
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    else
+                      return SlideshowShimmer();
+                  })),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -410,7 +435,7 @@ class UserStatsWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.black.withOpacity(.05),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
@@ -422,6 +447,7 @@ class UserStatsWidget extends StatelessWidget {
       ),
       height: 81,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             child: Column(
@@ -429,19 +455,18 @@ class UserStatsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Koin Kamu",
+                  "Saldo Kamu",
                   style: GoogleFonts.inter().copyWith(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 10,
+                    color: BaseColors.primaryColor,
                   ),
                 ),
                 SizedBox(height: 5),
                 Row(
                   children: [
-                    Icon(
-                      UniconsLine.usd_circle,
-                      color: BaseColors.primaryColor,
-                      size: 18,
+                    SvgPicture.asset(
+                      'assets/svg/ic_wallet.svg',
+                      height: 18,
                     ),
                     SizedBox(
                       width: 10,
@@ -457,50 +482,48 @@ class UserStatsWidget extends StatelessWidget {
                 ),
               ],
             ),
-            flex: 4,
           ),
-          Expanded(
-            child: InkWell(
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(0XFFDDDDDD),
-                  gradient: BaseGradient.primaryGradient,
-                ),
-                width: 35,
-                height: 35,
-                child: Icon(
-                  UniconsLine.clock,
-                  color: Colors.white,
-                ),
-              ),
-              onTap: () {
-                Navigator.of(context).pushNamed(ROUTER.PROFILE_COIN);
-              },
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: VerticalDivider(
+              thickness: 1.3,
             ),
-            flex: 1,
           ),
+          SizedBox(width: 10),
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0XFFDDDDDD),
-                gradient: BaseGradient.primaryGradient,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              width: 98,
-              height: 35,
-              child: Center(
-                child: Text(
-                  "Tambah Koin",
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Poin Saya",
                   style: GoogleFonts.inter().copyWith(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    fontSize: 10,
+                    color: BaseColors.primaryColor,
                   ),
                 ),
-              ),
+                SizedBox(height: 5),
+                Row(
+                  children: [
+                    Icon(
+                      UniconsLine.usd_circle,
+                      color: BaseColors.primaryColor,
+                      size: 20,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "0 pts",
+                      style: GoogleFonts.inter().copyWith(
+                        fontSize: 20,
+                        color: BaseColors.primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            flex: 2,
           ),
         ],
       ),

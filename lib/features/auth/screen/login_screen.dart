@@ -13,6 +13,8 @@ class LoginScreen extends StatelessWidget {
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,113 +38,123 @@ class LoginScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Column(
-                children: [
-                  SizedBox(height: 20),
-                  Text(
-                    "Masuk Akun",
-                    style: GoogleFonts.inter().copyWith(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    "Silahkan masukan nomor handphone & kata sandi akun anda yang telah terdaftar untuk masuk ke aplikasi",
-                    style: GoogleFonts.inter().copyWith(
-                      fontSize: 15,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 40),
-                  CustomTextInput(
-                    hintText: "Masukan nomor handphone",
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: SvgPicture.asset('assets/svg/indonesia.svg'),
-                    ),
-                    validator: (String? value) {
-                      return (value == null)
-                          ? 'Nomor handphone harus diisi!'
-                          : null;
-                    },
-                    controller: phoneController,
-                    keyboardType: TextInputType.number,
-                  ),
-                  SizedBox(height: 20),
-                  CustomTextInput(
-                    hintText: "Masukan kata sandi",
-                    obsecureText: true,
-                    controller: passwordController,
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    width: double.infinity,
-                    child: Text(
-                      "Lupa kata sandi?",
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    SizedBox(height: 20),
+                    Text(
+                      "Masuk Akun",
                       style: GoogleFonts.inter().copyWith(
-                        fontSize: 15,
-                        color: BaseColors.primaryColor,
+                        fontSize: 32,
                         fontWeight: FontWeight.bold,
                       ),
-                      textAlign: TextAlign.right,
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  Container(
-                    width: double.infinity,
-                    child: Text.rich(
+                    SizedBox(height: 20),
+                    Text(
+                      "Silahkan masukan nomor handphone & kata sandi akun anda yang telah terdaftar untuk masuk ke aplikasi",
+                      style: GoogleFonts.inter().copyWith(
+                        fontSize: 15,
+                      ),
                       textAlign: TextAlign.center,
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Ketika masuk, Anda menyetujui ",
-                            style: GoogleFonts.inter().copyWith(
-                              fontSize: 15,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "Persyaratan Layanan ",
-                            style: GoogleFonts.inter().copyWith(
-                              fontSize: 15,
-                              color: BaseColors.primaryColor,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                          TextSpan(
-                            text:
-                                "Dinotis & mengakui bahwa Pemberitahuan Privasi kami berlaku.",
-                            style: GoogleFonts.inter().copyWith(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],
+                    ),
+                    SizedBox(height: 40),
+                    CustomTextInput(
+                      hintText: "Masukan nomor handphone",
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: SvgPicture.asset('assets/svg/indonesia.svg'),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Nomor handphone harus di isi!';
+                        }
+                        return null;
+                      },
+                      controller: phoneController,
+                      keyboardType: TextInputType.number,
+                    ),
+                    SizedBox(height: 20),
+                    CustomTextInput(
+                      hintText: "Masukan kata sandi",
+                      obsecureText: true,
+                      controller: passwordController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password harus di isi!';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      child: Text(
+                        "Lupa kata sandi?",
+                        style: GoogleFonts.inter().copyWith(
+                          fontSize: 15,
+                          color: BaseColors.primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.right,
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    width: double.infinity,
-                    child: Text.rich(
+                    SizedBox(height: 20),
+                    Container(
+                      width: double.infinity,
+                      child: Text.rich(
                         textAlign: TextAlign.center,
-                        TextSpan(children: [
-                          TextSpan(
-                            text: "Belum punya akun? ",
-                            style: GoogleFonts.inter().copyWith(
-                              fontSize: 15,
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Ketika masuk, Anda menyetujui ",
+                              style: GoogleFonts.inter().copyWith(
+                                fontSize: 15,
+                              ),
                             ),
-                          ),
-                          TextSpan(
-                            text: "Daftar di sini",
-                            style: GoogleFonts.inter().copyWith(
-                              fontSize: 15,
-                              color: BaseColors.primaryColor,
-                              decoration: TextDecoration.underline,
+                            TextSpan(
+                              text: "Persyaratan Layanan ",
+                              style: GoogleFonts.inter().copyWith(
+                                fontSize: 15,
+                                color: BaseColors.primaryColor,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
-                          ),
-                        ])),
-                  ),
-                ],
+                            TextSpan(
+                              text:
+                                  "Dinotis & mengakui bahwa Pemberitahuan Privasi kami berlaku.",
+                              style: GoogleFonts.inter().copyWith(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      child: Text.rich(
+                          textAlign: TextAlign.center,
+                          TextSpan(children: [
+                            TextSpan(
+                              text: "Belum punya akun? ",
+                              style: GoogleFonts.inter().copyWith(
+                                fontSize: 15,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "Daftar di sini",
+                              style: GoogleFonts.inter().copyWith(
+                                fontSize: 15,
+                                color: BaseColors.primaryColor,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ])),
+                    ),
+                  ],
+                ),
               ),
             ),
             Align(
@@ -181,9 +193,12 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      onTap: () => context
-                          .read<AuthCubit>()
-                          .login(phoneController.text, passwordController.text),
+                      onTap: () {
+                        if (_formKey.currentState!.validate()) {
+                          context.read<AuthCubit>().login(
+                              phoneController.text, passwordController.text);
+                        }
+                      },
                     ),
                   );
                 }

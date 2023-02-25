@@ -16,4 +16,5 @@ class ROUTER {
   static const EVENT = '/event';
   static const MEETING_DETAIL = '/meeting-detail';
   static const MEETING_LINE = '/meeting-line';
+  static const NOTIFICATION = '/notification';
 }

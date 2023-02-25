@@ -74,7 +74,10 @@ class _CreatorDetailScreenState extends State<CreatorDetailScreen>
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(100),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(60),
+                    topRight: Radius.circular(60),
+                  ),
                 ),
                 child: TabBar(
                   labelColor: Colors.black,
@@ -107,7 +110,8 @@ class _CreatorDetailScreenState extends State<CreatorDetailScreen>
                 ),
               ),
               Expanded(
-                child: Padding(
+                child: Container(
+                  color: Colors.white,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TabBarView(
                     controller: _tabController,
@@ -236,23 +240,23 @@ class _CreatorDetailScreenState extends State<CreatorDetailScreen>
                           ],
                         ),
                       ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Image.asset('assets/images/group.png'),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Belum ada private video call",
-                            style: GoogleFonts.inter().copyWith(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                      SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/images/group.png',
+                              height: 237,
                             ),
-                          ),
-                        ],
+                            Text(
+                              "Belum ada private video call",
+                              style: GoogleFonts.inter().copyWith(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
